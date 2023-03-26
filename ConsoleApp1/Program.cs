@@ -50,60 +50,47 @@ namespace testing
                 Console.WriteLine("Интервалы: ");
                 for (var i = 0; i < interval.Count - 1; i++)
                 {
-                    Console.WriteLine("$$[" + interval[i] + ";" + interval[i + 1] + "]$$");
+                    Console.WriteLine("[" + interval[i] + ";" + interval[i + 1] + "]");
                 }
 
                 Result = Math.Abs(interval[Min_I + 1] - interval[Min_I]);
                 Console.WriteLine("Характеристики: ");
-
+                Console.WriteLine("$$");
                 for (var i = 0; i < R.Count; i++)
                 {
-                    Console.WriteLine("$$R(" + i + ") = " + R[i] + "$$");
+                    Console.WriteLine("R(" + i + ") = " + R[i] + "");
                 }
-
+                Console.WriteLine("$$");
                 if (Result > eps)
                 {
+                    Console.WriteLine("Точка останова не выполняется: |" + interval[Min_I + 1] + " - " + interval[Min_I] + "| = " + Result + " >= eps");
 
-                    Console.WriteLine("Точка останова не выполняется: $$ |" + interval[Min_I + 1] + " - " + interval[Min_I] + "| = " + Result + " >= /epsilon $$");
-                    Console.WriteLine("Наименьшая характеристика у интервала: ");
-                    Console.WriteLine("$$");
                     Console.WriteLine("[" + interval[Min_I] + ";" + interval[Min_I + 1] + "]");
-                    Console.WriteLine("$$");
 
-                    Console.WriteLine("Наименьшая характеристика");
-                    Console.WriteLine("$$");
-                    Console.WriteLine("R = " + R[Min_I]);
-                    Console.WriteLine("$$");
+                    Console.WriteLine(R[Min_I]);
 
                     interval.Add(((interval[Min_I + 1] + interval[Min_I]) / 2 - (f(interval[Min_I + 1]) - f(interval[Min_I])) / 2) / l);
                     interval.Sort();
                 }
                 else
                 {
-
-                    Console.WriteLine("Точка останова выполняется: $$ |" + interval[Min_I + 1] + " - " + interval[Min_I] + "| = " + Result + " <= /epsilon $$ ");
+                    Console.WriteLine("Точка останова выполняется: |" + interval[Min_I + 1] + " - " + interval[Min_I] + "| = " + Result + " <= eps");
                     Console.WriteLine("Интервалы: ");
-
                     for (var i = 0; i < interval.Count - 1; i++)
                     {
-                        Console.WriteLine("$$[" + interval[i] + ";" + interval[i + 1] + "]$$");
+                        Console.WriteLine("[" + interval[i] + ";" + interval[i + 1] + "]");
                     }
-
-
                     for (var i = 0; i < R.Count; i++)
                     {
-                        Console.WriteLine("$$R(" + i + ") = " + R[i] + "$$");
+                        Console.WriteLine("R(" + i + ") = " + R[i]);
                     }
-
                     double F_min = 10000;
                     for (var i = 0; i < R.Count; i++)
                     {
                         if (R[i] < F_min) F_min = R[i];
                     }
-                    Console.WriteLine("$$");
                     Console.WriteLine("f* = " + F_min);
                     Console.WriteLine("x* = " + interval[Min_I]);
-                    Console.WriteLine("$$");
                 }
 
                 k++;
